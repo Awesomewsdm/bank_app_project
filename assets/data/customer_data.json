@@ -1,0 +1,41 @@
+{
+    "customerStaticData": [
+      {
+        "customerID": "23399922",
+        "customerName": "John Jimoh",
+        "gender": "M",
+        "title": "Mr."
+      }
+    ],
+    "customerTransactionData": [
+      {
+        "customerID": "23399922",
+        "transactionDate": "01-02-2021",
+        "transactionAmount": 10000,
+        "transactionDirection": "Credit",
+        "transactionNarration": "Deposit"
+      },
+      {
+        "customerID": "23399922",
+        "transactionDate": "01-02-2021",
+        "transactionAmount": 1000,
+        "transactionDirection": "Debit",
+        "transactionNarration": "Withdrawal"
+      },
+      {
+        "customerID": "23399922",
+        "transactionDate": "01-02-2021",
+        "transactionAmount": 1500,
+        "transactionDirection": "Credit",
+        "transactionNarration": "Inflow"
+      },
+      {
+        "customerID": "23399922",
+        "transactionDate": "01-02-2021",
+        "transactionAmount": 50,
+        "transactionDirection": "Debit",
+        "transactionNarration": "gift"
+      }
+    ]
+  }
+  
