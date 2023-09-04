@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:bank_app/src/bloc/bottom_navigation/bottom_navigation_event.dart';
 import 'package:bank_app/src/bloc/bottom_navigation/bottom_navigation_state.dart';
-import 'package:bank_app/src/common_widgets/bottom_sheet.dart';
-import 'package:bank_app/src/common_widgets/transaction_card_widget.dart';
+import 'package:bank_app/src/common_widgets/transaction_screen/build_transactions_page.dart';
 import 'package:bank_app/src/constants/app_routes.dart';
 import 'package:bank_app/src/constants/colors.dart';
 import 'package:bank_app/src/constants/customer_data.dart';
@@ -115,13 +114,13 @@ class Home extends StatelessWidget {
           },
           children: [
             _buildAccountBalancePage(),
-            _buildTransactionsPage(),
-            _buildTransactionsPage(),
+            buildTransactionsPage(),
+            buildTransactionsPage(),
           ],
         ),
       ),
       bottomNavigationBar: BlocBuilder<NavigationBloc, NavigationState>(
-        builder: (context, state) => _buildBottomNavigationBar(context, state),
+        builder: (context, state) => buildBottomNavigationBar(context, state),
       ),
     );
   }
@@ -193,162 +192,6 @@ class Home extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildTransactionsPage() {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          color: tTranscationHeaderColor,
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-            "Transactions",
-            style: GoogleFonts.openSans(
-              fontWeight: FontWeight.w600,
-              fontSize: 22,
-              color: tPrimaryColor,
-            ),
-          ),
-        ),
-        Expanded(
-          child: DefaultTabController(
-            length: 3,
-            child: Column(
-              children: [
-                Material(
-                  color: tTranscationHeaderColor,
-                  child: TabBar(
-                    overlayColor:
-                        MaterialStateProperty.all(tTranscationHeaderColor),
-                    labelStyle: const TextStyle(
-                        fontSize: 17, fontWeight: FontWeight.w500),
-                    indicatorColor: tPrimaryColor,
-                    labelColor: tPrimaryColor,
-                    tabs: const [
-                      Tab(text: tAll),
-                      Tab(text: tDebit),
-                      Tab(text: tCredit),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    children: [
-                      _buildTransactionList(tAll),
-                      _buildTransactionList(tDebit),
-                      _buildTransactionList(tCredit),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTransactionList(String filter) {
-    return SizedBox(
-      height: double.infinity,
-      child: FutureBuilder<List<CustomerTransactionData>>(
-        future: _loadTransactionData(filter),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return const Text('Error loading transaction data');
-          } else if (snapshot.hasData) {
-            final transactionDataList = snapshot.data!;
-
-            return ListView.builder(
-              itemCount: transactionDataList.length,
-              itemBuilder: (context, index) {
-                final transactionData = transactionDataList[index];
-                final String transactionAmount =
-                    decimalFormatter.format(transactionData.transactionAmount);
-
-                return TransactionCard(
-                  onTap: () {
-                    showTransactionBottomSheet(
-                      context,
-                      transactionData.transactionDate,
-                      transactionData.transactionNarration,
-                      transactionData.transactionDirection,
-                      "GHC 0.00",
-                      transactionAmount,
-                    );
-                  },
-                  icon: transactionData.transactionDirection == tCredit
-                      ? tMoneySendIcon
-                      : tMoneyReceiveIcon,
-                  transactionAmount: transactionAmount,
-                  transactionNarration: transactionData.transactionNarration,
-                  transactionDate: transactionData.transactionDate,
-                  transactionDirection: transactionData.transactionDirection,
-                  iconBgColor: transactionData.transactionDirection == tCredit
-                      ? backgroundColor2
-                      : backgroundColor1,
-                  majorGradientColor:
-                      transactionData.transactionDirection == tCredit
-                          ? tPrimaryColor
-                          : tSecondaryColor,
-                  minorGradientColor:
-                      transactionData.transactionDirection == tCredit
-                          ? tGradientColor1
-                          : tGradientColor2,
-                );
-              },
-            );
-          } else {
-            return const Text('No data available');
-          }
-        },
-      ),
-    );
-  }
-
-  Widget _buildBottomNavigationBar(
-      BuildContext context, NavigationState state) {
-    return Container(
-      color: state.backgroundColor,
-      height: 72,
-      child: Row(
-        children: [
-          Expanded(
-            child: BottomNavShape(
-              label: "Home",
-              onTap: () {
-                context
-                    .read<NavigationBloc>()
-                    .add(const NavigationTabSelected(0));
-                pageController.jumpToPage(0);
-              },
-              buttonIcon: tHomeIcon,
-              backgroundColor2: state.backgroundColor,
-              backgroundColor1: state.backgroundColor,
-              iconColor: state.textColor,
-            ),
-          ),
-          Expanded(
-            child: BottomNavShape(
-              label: "Transaction",
-              onTap: () {
-                context
-                    .read<NavigationBloc>()
-                    .add(const NavigationTabSelected(1));
-                pageController.jumpToPage(1);
-              },
-              buttonIcon: tTransactionIcon,
-              backgroundColor2: state.backgroundColor,
-              backgroundColor1: state.backgroundColor,
-              iconColor: state.textColor,
-            ),
-          )
-        ],
-      ),
     );
   }
 }

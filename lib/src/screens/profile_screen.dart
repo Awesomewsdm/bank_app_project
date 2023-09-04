@@ -56,6 +56,22 @@ class ProfileScreen extends StatelessWidget {
           Container(
             color: profilePicBgColor,
             height: 156,
+            child: Row(
+              children: [
+                Image.asset(
+                  tProfilePic,
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    UserInfo(title: ,label:,),
+                  ],
+                )
+              ],
+            ),
           ),
           Container(
             width: double.infinity,
@@ -146,6 +162,26 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class UserInfo extends StatelessWidget {
+  const UserInfo({
+    super.key, required this.title, required this.label,
+  });
+  final String title;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title),
+        Text(label),
+      ],
+    ));
   }
 }
 
