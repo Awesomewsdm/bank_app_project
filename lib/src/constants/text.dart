@@ -11,9 +11,11 @@ const String tStudentID = "Student ID";
 const String tPassword = "Password";
 const String tConfirmPassword = "Confirm Password";
 const String tConfirmNewPassword = "Confirm New Password";
+const String tConfirmOldPassword = "Confirm Old Password";
 const String tFullName = "Full Name";
 const String tForgetPassword = "Forgot password ?";
 const String tSignInWithGoogle = "Sign-In with Google";
+const String tAppVersion = "App Version";
 
 // -- Bottom App Bar
 const String tResetPassword = "Reset Password";
@@ -62,4 +64,16 @@ const String tTransactionsDirection = "Transaction Direction";
 const String tTransactionsNarration = "Transaction Narration";
 const String tTransactionDate = "Transaction Date";
 
-//  -- bOTTOM sHEET
+//  -- Profile Page
+const String tChangeAccountPassword = "Change Account Password";
+const String tTermsAndConditions = "Terms and Conditions";
+const String tLogout = "Logout";
+const String tPrivacyPolicy = "Privacy Policy";
+
+const String tTitle = "TITLE";
+const String tGender = "Gender";
+const String tOtherName = "OTHER NAMES";
+const String tFirstName = 'FIRST NAME';
+
+const String tAboutTitle = 'About';
+const String tAccountSettings = 'Account Settings';

@@ -49,5 +49,10 @@ const String tProfileImage = "assets/images/Union.png";
 const String tMoneyReceiveIcon = "assets/svg/money-recive.svg";
 const String tMoneySendIcon = "assets/svg/money-send.svg";
 
+//  -- Icons
+const String tLockIcon = "assets/svg/lock.svg";
+const String tLogoutIcon = "assets/svg/logout.svg";
+
 // -- Transaction Screen
 const tBanner = "assets/svg/banner.svg";
+const tProfilePic = "assets/svg/profile_pic_2.svg";

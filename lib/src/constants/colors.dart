@@ -25,5 +25,5 @@ const Color backgroundColor2 = Color.fromARGB(255, 222, 244, 251);
 const primaryTextColor = Color(0xFF151940);
 const secondaryTextColor = Colors.black54;
 
-// -- ON-BOARDING COLORS
-
+// -- Profile Page Colors
+const profilePicBgColor = Color(0xFFFDF8EC);

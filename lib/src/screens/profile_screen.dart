@@ -54,6 +54,10 @@ class ProfileScreen extends StatelessWidget {
           ),
           Container(color: tPrimaryColor.withOpacity(0.6), height: 5),
           Container(
+            color: profilePicBgColor,
+            height: 156,
+          ),
+          Container(
             width: double.infinity,
             color: tTranscationHeaderColor,
             padding: const EdgeInsets.all(10.0),

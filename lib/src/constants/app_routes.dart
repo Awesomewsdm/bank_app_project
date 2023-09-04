@@ -39,7 +39,7 @@ final router = GoRouter(
       builder: (context, state) => Home(),
     ),
     GoRoute(
-      path: pProfile,
+      path: pProfileScreen,
       builder: (context, state) => const ProfileScreen(),
     ),
   ],
