@@ -16,6 +16,7 @@ const String tFullName = "Full Name";
 const String tForgetPassword = "Forgot password ?";
 const String tSignInWithGoogle = "Sign-In with Google";
 const String tAppVersion = "App Version";
+const String tGreetings = "Good Morning";
 
 // -- Bottom App Bar
 const String tResetPassword = "Reset Password";
@@ -77,3 +78,7 @@ const String tFirstName = 'FIRST NAME';
 
 const String tAboutTitle = 'About';
 const String tAccountSettings = 'Account Settings';
+
+// --Bottom Navagation
+const String tBottomNavLabel1 = "Home";
+const String tBottomNavLabel2 = "Transaction";

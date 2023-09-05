@@ -1,4 +1,6 @@
+import 'package:bank_app/src/constants/customer_data.dart';
 import 'package:bank_app/src/constants/text.dart';
+import 'package:bank_app/src/service/customer_static_data.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_app/src/constants/colors.dart';
 import 'package:bank_app/src/constants/image_strings.dart';
@@ -56,25 +58,77 @@ class ProfileScreen extends StatelessWidget {
           Container(
             color: profilePicBgColor,
             height: 156,
-            child: Row(
-              children: [
-                Image.asset(
-                  tProfilePic,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    UserInfo(
-                      title: "",
-                      label: "",
-                    ),
-                  ],
-                )
-              ],
-            ),
+            child: FutureBuilder<List<CustomerStaticData>>(
+                future: loadCustomerStaticData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text("Error: ${snapshot.error}");
+                  } else if (!snapshot.hasData) {
+                    return const Text("No data available");
+                  } else {
+                    final customerStaticData =
+                        snapshot.data!.first; // Assuming you have one customer
+                    return Row(
+                      children: [
+                        Image.asset(
+                          tProfilePic,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            UserInfo(
+                              title: "FIRST NAME",
+                              label: customerStaticData.customerName,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            UserInfo(
+                              title: "GENDER",
+                              label: customerStaticData.gender,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            UserInfo(
+                              title: "ID",
+                              label: customerStaticData.customerID,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const UserInfo(
+                                title: "OTHER NAME",
+                                label: "",
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              UserInfo(
+                                title: "TITLE",
+                                label: customerStaticData.title,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ],),
+                      ],
+                    );
+                  }
+                }),
           ),
           Container(
             width: double.infinity,

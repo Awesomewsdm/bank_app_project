@@ -63,13 +63,19 @@ Widget buildAccountBalancePage() {
         width: double.infinity,
         color: tTranscationHeaderColor,
         padding: const EdgeInsets.all(10.0),
-        child: Text(
-          "Recent Transactions",
-          style: GoogleFonts.openSans(
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-            color: Colors.black,
-          ),
+        child: Row(
+          children: [
+            Text(
+              "Recent Transactions",
+              style: GoogleFonts.openSans(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            const Spacer(),
+            const Text("See all ")
+          ],
         ),
       ),
       FutureBuilder(

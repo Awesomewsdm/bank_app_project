@@ -6,6 +6,7 @@ import 'package:bank_app/src/common_widgets/transaction_screen/transaction_list.
 import 'package:bank_app/src/constants/app_routes.dart';
 import 'package:bank_app/src/constants/colors.dart';
 import 'package:bank_app/src/constants/image_strings.dart';
+import 'package:bank_app/src/constants/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/bottom_navigation/bottom_navigation_bloc.dart';
@@ -43,7 +44,7 @@ class Home extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
-                        "Good Morning",
+                        tGreetings,
                         style: GoogleFonts.openSans(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -78,7 +79,7 @@ class Home extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      "Good Morning",
+                                      tGreetings,
                                     ),
                                     Text("Mr. John Jimoh",
                                         style:

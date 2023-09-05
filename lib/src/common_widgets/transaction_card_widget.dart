@@ -37,7 +37,7 @@ class TransactionCard extends StatelessWidget {
           border: Border.all(width: 0, color: tTransactionCardBorderColor),
         ),
         width: double.infinity,
-        height: 90.0,
+        height: 87.0,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
