@@ -6,13 +6,16 @@ import 'package:bank_app/src/common_widgets/transaction_card_widget.dart';
 import 'package:bank_app/src/constants/colors.dart';
 import 'package:bank_app/src/constants/customer_data.dart';
 import 'package:bank_app/src/constants/image_strings.dart';
+import 'package:bank_app/src/constants/sizes.dart';
 import 'package:bank_app/src/constants/text.dart';
-import 'package:bank_app/src/service/api_request.dart';
+import 'package:bank_app/src/service/customer_transaction_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 final decimalFormatter = NumberFormat('#,##0.00');
+
+final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
 
 Widget buildTransactionList(String filter) {
   return SizedBox(
@@ -27,42 +30,48 @@ Widget buildTransactionList(String filter) {
         } else if (snapshot.hasData) {
           final transactionDataList = snapshot.data!;
 
-          return ListView.builder(
-            itemCount: transactionDataList.length,
-            itemBuilder: (context, index) {
+          return AnimatedList(
+            key: listKey,
+            initialItemCount: transactionDataList.length,
+            itemBuilder: (context, index, animation) {
               final transactionData = transactionDataList[index];
               final String transactionAmount =
                   decimalFormatter.format(transactionData.transactionAmount);
-
-              return TransactionCard(
-                onTap: () {
-                  showTransactionBottomSheet(
-                    context,
-                    transactionData.transactionDate,
-                    transactionData.transactionNarration,
-                    transactionData.transactionDirection,
-                    "GHC 0.00",
-                    transactionAmount,
-                  );
-                },
-                icon: transactionData.transactionDirection == tCredit
-                    ? tMoneySendIcon
-                    : tMoneyReceiveIcon,
-                transactionAmount: transactionAmount,
-                transactionNarration: transactionData.transactionNarration,
-                transactionDate: transactionData.transactionDate,
-                transactionDirection: transactionData.transactionDirection,
-                iconBgColor: transactionData.transactionDirection == tCredit
-                    ? backgroundColor2
-                    : backgroundColor1,
-                majorGradientColor:
-                    transactionData.transactionDirection == tCredit
-                        ? tPrimaryColor
-                        : tSecondaryColor,
-                minorGradientColor:
-                    transactionData.transactionDirection == tCredit
-                        ? tGradientColor1
-                        : tGradientColor2,
+              return SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(1.0, 0.0),
+                  end: const Offset(0.0, 0.0),
+                ).animate(animation),
+                child: TransactionCard(
+                  onTap: () {
+                    showTransactionBottomSheet(
+                      context,
+                      transactionData.transactionDate,
+                      transactionData.transactionNarration,
+                      transactionData.transactionDirection,
+                      "GHC 0.00",
+                      transactionAmount,
+                    );
+                  },
+                  icon: transactionData.transactionDirection == tCredit
+                      ? tMoneySendIcon
+                      : tMoneyReceiveIcon,
+                  transactionAmount: transactionAmount,
+                  transactionNarration: transactionData.transactionNarration,
+                  transactionDate: transactionData.transactionDate,
+                  transactionDirection: transactionData.transactionDirection,
+                  iconBgColor: transactionData.transactionDirection == tCredit
+                      ? backgroundColor2
+                      : backgroundColor1,
+                  majorGradientColor:
+                      transactionData.transactionDirection == tCredit
+                          ? tPrimaryColor
+                          : tSecondaryColor,
+                  minorGradientColor:
+                      transactionData.transactionDirection == tCredit
+                          ? tGradientColor1
+                          : tGradientColor2,
+                ),
               );
             },
           );
@@ -78,12 +87,12 @@ Widget buildBottomNavigationBar(
     pageController, BuildContext context, NavigationState state) {
   return Container(
     color: state.backgroundColor,
-    height: 72,
+    height: bottomNavigatorHeight,
     child: Row(
       children: [
         Expanded(
           child: BottomNavShape(
-            label: "Home",
+            label: tBottomNavLabel1,
             onTap: () {
               context
                   .read<NavigationBloc>()
@@ -98,7 +107,7 @@ Widget buildBottomNavigationBar(
         ),
         Expanded(
           child: BottomNavShape(
-            label: "Transaction",
+            label: tBottomNavLabel2,
             onTap: () {
               context
                   .read<NavigationBloc>()
