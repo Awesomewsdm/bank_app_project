@@ -67,7 +67,10 @@ class ProfileScreen extends StatelessWidget {
                 const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    UserInfo(title: ,label:,),
+                    UserInfo(
+                      title: "",
+                      label: "",
+                    ),
                   ],
                 )
               ],
@@ -90,14 +93,14 @@ class ProfileScreen extends StatelessWidget {
             iconString: tLockIcon,
             label: tChangeAccountPassword,
             onTap: () {
-              router.push(pLogin);
+              router.push(pChangePasswordScreen);
             },
           ),
           ProfileInfoCard(
             iconString: tLogoutIcon,
             label: tLogout,
             onTap: () {
-              router.push(pChangePasswordScreen);
+              router.push(pLogin);
             },
           ),
           Container(
@@ -167,7 +170,9 @@ class ProfileScreen extends StatelessWidget {
 
 class UserInfo extends StatelessWidget {
   const UserInfo({
-    super.key, required this.title, required this.label,
+    super.key,
+    required this.title,
+    required this.label,
   });
   final String title;
   final String label;

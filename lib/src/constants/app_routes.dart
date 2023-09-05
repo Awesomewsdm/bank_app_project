@@ -1,5 +1,6 @@
 // ignore: depend_on_referenced_packages
 import 'package:bank_app/src/screens/auth_screens/login_screen.dart';
+import 'package:bank_app/src/screens/change_password_screen.dart';
 import 'package:bank_app/src/screens/data.dart';
 import 'package:bank_app/src/screens/home_screen.dart';
 import 'package:bank_app/src/screens/profile_screen.dart';
@@ -41,6 +42,10 @@ final router = GoRouter(
     GoRoute(
       path: pProfileScreen,
       builder: (context, state) => const ProfileScreen(),
+    ),
+    GoRoute(
+      path: pChangePasswordScreen,
+      builder: (context, state) => ChangePasswordScreen(),
     ),
   ],
 );

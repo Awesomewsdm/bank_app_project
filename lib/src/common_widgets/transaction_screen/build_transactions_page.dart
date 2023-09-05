@@ -2,6 +2,7 @@ import 'package:bank_app/src/common_widgets/transaction_screen/transaction_list.
 import 'package:bank_app/src/constants/colors.dart';
 import 'package:bank_app/src/constants/text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget buildTransactionsPage() {
   return Column(
