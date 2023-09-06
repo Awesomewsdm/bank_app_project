@@ -115,7 +115,7 @@ class HomeScreen extends StatelessWidget {
             context.read<NavigationBloc>().add(NavigationTabSelected(index));
           },
           children: [
-            buildAccountBalancePage(),
+            buildAccountBalancePage(context),
             buildTransactionsPage(),
           ],
         ),

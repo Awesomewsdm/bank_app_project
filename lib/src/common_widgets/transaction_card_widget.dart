@@ -32,12 +32,12 @@ class TransactionCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 18),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
         decoration: BoxDecoration(
           border: Border.all(width: 0, color: tTransactionCardBorderColor),
         ),
         width: double.infinity,
-        height: 90.0,
+        height: 80.0,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,10 +80,10 @@ class TransactionCard extends StatelessWidget {
                 Text(
                   "GHC $transactionAmount",
                   style: GoogleFonts.roboto(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 6,
                 ),
                 RichText(
                   text: TextSpan(
@@ -105,9 +105,9 @@ class TransactionCard extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: iconBgColor,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(30),
               ),
-              padding: const EdgeInsets.all(6),
+              padding: const EdgeInsets.all(4),
               child: Text(
                 transactionDirection,
                 style: TextStyle(color: majorGradientColor),
@@ -155,16 +155,15 @@ class HomePage extends StatelessWidget {
 class BottomNavShape extends StatelessWidget {
   const BottomNavShape({
     super.key,
-    required this.navBgColor1,
-    required this.navBgColor2,
+    required this.navBgColor,
+    
     required this.iconColor,
     required this.buttonIcon,
     required this.onTap,
     required this.label, required this.textColor,
   });
 
-  final Color navBgColor1;
-  final Color navBgColor2;
+  final Color navBgColor;
   final String buttonIcon;
   final Color iconColor;
   final void Function() onTap;
@@ -180,7 +179,7 @@ class BottomNavShape extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              color: navBgColor1,
+              color: navBgColor,
               width: 100,
               height: 100,
             ),
@@ -188,7 +187,7 @@ class BottomNavShape extends StatelessWidget {
               transform: Matrix4.skewX(-0.2), // Adjust the skew value as needed
               alignment: Alignment.topLeft,
               child: Container(
-                color: navBgColor2,
+                color: navBgColor,
               ),
             ),
             Center(

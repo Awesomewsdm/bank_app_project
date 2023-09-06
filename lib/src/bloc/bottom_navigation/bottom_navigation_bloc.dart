@@ -11,8 +11,9 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
               selectedIndex: 0,
               navBgColor1: tPrimaryColor,
               navBgColor2: tWhiteColor,
-              textColor: tOrangeColor,
-              iconColor: tOrangeColor),
+              textColor1: tOrangeColor,
+              textColor2: tWhiteColor,
+             iconColor1: tOrangeColor, iconColor2: tWhiteColor),
         ) {
     on<NavigationTabSelected>(_onNavigationTabSelected);
   }
@@ -24,27 +25,33 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
           selectedIndex: event.selectedTab,
           backgroundColor: 
           event.selectedTab == 0
-          ? tPrimaryColor
-          : tWhiteColor,
+          ? tWhiteColor 
+          : tPrimaryColor,
           navBgColor1: 
           event.selectedTab == 0
           ? tPrimaryColor
           : tWhiteColor,
-navBgColor2:  
-event.selectedTab == 0
-          ? tPrimaryColor
-          : tWhiteColor
- ,
-          textColor: event.selectedTab == 0 ?
-          tOrangeColor:
-       tWhiteColor,  
-           iconColor:
+          navBgColor2:  
+          event.selectedTab == 0
+          ?tWhiteColor 
+          : tPrimaryColor,
+          textColor1: 
+          event.selectedTab == 0 
+          ? tOrangeColor:
+          tPrimaryColor,
+          textColor2: event.selectedTab == 0 ?
+          tPrimaryColor:
+          tOrangeColor,  
+           iconColor1:
            event.selectedTab == 0 
-      ? tOrangeColor:
-       tWhiteColor, 
-           ),
+          ? tOrangeColor:
+          tPrimaryColor,
+          iconColor2:
+          event.selectedTab == 0 
+          ?tPrimaryColor :tOrangeColor
+             , 
+          ),
     );
   }
-
  
 }

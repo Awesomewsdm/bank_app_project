@@ -6,58 +6,61 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-Widget buildAccountBalancePage() {
+Widget buildAccountBalancePage(BuildContext context) {
+  var size = MediaQuery.sizeOf(context);
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(color: tPrimaryColor.withOpacity(0.6), height: 5),
-      Stack(
-        children: [
-          SvgPicture.asset(
-            tBanner,
-            width: double.infinity,
-            height: 180,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Account Balance",
-                  style:
-                      GoogleFonts.openSans(fontSize: 18, color: Colors.white),
-                ),
-                Text(
-                  "GHC 10,000.00",
-                  style: GoogleFonts.openSans(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Text(
-                      "Checking Account",
-                      style: GoogleFonts.openSans(
-                          fontSize: 12, color: Colors.white),
-                    ),
-                    const Spacer(),
-                    Text(
-                      "875431143137098707",
-                      style: GoogleFonts.openSans(
-                          fontSize: 12, color: Colors.white),
-                    ),
-                  ],
-                ),
-              ],
+      SizedBox(
+        width: size.width,
+      height: 150,
+        child: Stack(
+          children: [
+            SvgPicture.asset(
+              tBanner,
+              width: size.width,
+              height: 180,
+              fit: BoxFit.cover,
             ),
-          ),
-        ],
+           
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Account Balance",
+                    style:
+                        GoogleFonts.openSans(fontSize: 18, color: Colors.white),
+                  ),
+                  Text(
+                    "GHC 10,000.00",
+                    style: GoogleFonts.openSans(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Checking Account",
+                        style: GoogleFonts.openSans(
+                            fontSize: 12, color: Colors.white),
+                      ),
+                      const Spacer(),
+                      Text(
+                        "875431143137098707",
+                        style: GoogleFonts.openSans(
+                            fontSize: 12, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
       Container(
         width: double.infinity,

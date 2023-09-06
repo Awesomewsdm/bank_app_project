@@ -15,7 +15,7 @@ import 'package:intl/intl.dart';
 
 final decimalFormatter = NumberFormat('#,##0.00');
 
-final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
+// final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
 
 Widget buildTransactionList(String filter) {
   return SizedBox(
@@ -32,19 +32,13 @@ Widget buildTransactionList(String filter) {
 
           return 
           ListView.builder(
-            key: listKey,
             itemCount: transactionDataList.length,
             itemBuilder: (context, index) {
               final transactionData = transactionDataList[index];
               final String transactionAmount =
                   decimalFormatter.format(transactionData.transactionAmount);
               return 
-              // SlideTransition(
-              //   position: Tween<Offset>(
-              //     begin: const Offset(1.0, 0.0),
-              //     end: const Offset(1.0, 0.0),
-              //   ).animate(animation),
-              //   child: 
+            
                 TransactionCard(
                   onTap: () {
                     showTransactionBottomSheet(
@@ -89,7 +83,7 @@ Widget buildTransactionList(String filter) {
 Widget buildBottomNavigationBar(
     pageController, BuildContext context, NavigationState state) {
   return Container(
-    color: tWhiteColor,
+    color: state.backgroundColor,
     height: bottomNavigatorHeight,
     child: Row(
       children: [
@@ -103,10 +97,9 @@ Widget buildBottomNavigationBar(
               pageController.jumpToPage(0);
             },
             buttonIcon: tHomeIcon,
-            navBgColor1: state.backgroundColor,
-            navBgColor2: state.backgroundColor,
+            navBgColor: state.navBgColor1,
             
-            iconColor: state.iconColor, textColor: state.textColor,
+            iconColor: state.iconColor1, textColor: state.textColor1,
           ),
         ),
         Expanded(
@@ -119,9 +112,8 @@ Widget buildBottomNavigationBar(
               pageController.jumpToPage(1);
             },
             buttonIcon: tTransactionIcon,
-            navBgColor1: state.backgroundColor,
-            navBgColor2: state.backgroundColor,
-            iconColor: state.iconColor, textColor: state.textColor,
+            navBgColor: state.navBgColor2,
+            iconColor: state.iconColor2, textColor: state.textColor2,
           ),
         )
       ],
