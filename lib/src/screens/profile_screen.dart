@@ -58,7 +58,7 @@ class ProfileScreen extends StatelessWidget {
           Container(
             color: profilePicBgColor,
             height: 156,
-            child: FutureBuilder<List<CustomerStaticData>>(
+            child: FutureBuilder<CustomerStaticData>(
                 future: loadCustomerStaticData(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -69,7 +69,7 @@ class ProfileScreen extends StatelessWidget {
                     return const Text("No data available");
                   } else {
                     final customerStaticData =
-                        snapshot.data!.first; 
+                        snapshot.data!; 
                     
                      final customerNameParts = customerStaticData.customerName.split(' ');
             final firstName = customerNameParts[0];

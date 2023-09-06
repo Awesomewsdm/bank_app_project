@@ -7,13 +7,14 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   NavigationBloc()
       : super(
           const NavigationState(
-            backgroundColor: tPrimaryColor,
+            backgroundColor: tWhiteColor,
               selectedIndex: 0,
               navBgColor1: tPrimaryColor,
               navBgColor2: tWhiteColor,
               textColor1: tOrangeColor,
-              textColor2: tWhiteColor,
-             iconColor1: tOrangeColor, iconColor2: tWhiteColor),
+              textColor2: tPrimaryColor,
+             iconColor1: tOrangeColor, 
+             iconColor2: tPrimaryColor),
         ) {
     on<NavigationTabSelected>(_onNavigationTabSelected);
   }
@@ -33,15 +34,15 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
           : tWhiteColor,
           navBgColor2:  
           event.selectedTab == 0
-          ?tWhiteColor 
+          ? tWhiteColor 
           : tPrimaryColor,
           textColor1: 
           event.selectedTab == 0 
           ? tOrangeColor:
           tPrimaryColor,
-          textColor2: event.selectedTab == 0 ?
-          tPrimaryColor:
-          tOrangeColor,  
+          textColor2: event.selectedTab == 0 
+          ? tPrimaryColor:
+            tOrangeColor,  
            iconColor1:
            event.selectedTab == 0 
           ? tOrangeColor:
