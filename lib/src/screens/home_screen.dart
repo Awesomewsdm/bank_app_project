@@ -5,10 +5,8 @@ import 'package:bank_app/src/common_widgets/transaction_screen/build_transaction
 import 'package:bank_app/src/common_widgets/transaction_screen/transaction_list.dart';
 import 'package:bank_app/src/constants/app_routes.dart';
 import 'package:bank_app/src/constants/colors.dart';
-import 'package:bank_app/src/constants/customer_data.dart';
 import 'package:bank_app/src/constants/image_strings.dart';
 import 'package:bank_app/src/constants/text.dart';
-import 'package:bank_app/src/service/customer_static_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/bottom_navigation/bottom_navigation_bloc.dart';
@@ -21,7 +19,7 @@ class HomeScreen extends StatelessWidget {
   final PageController pageController = PageController(initialPage: 0);
   final decimalFormatter = NumberFormat('#,##0.00');
 
-  TabBar get tabBar => const TabBar(
+  TabBar get _tabBar => const TabBar(
         tabs: [
           Tab(icon: Icon(Icons.flight)),
           Tab(icon: Icon(Icons.directions_transit)),
@@ -36,38 +34,24 @@ class HomeScreen extends StatelessWidget {
         toolbarHeight: 82,
         backgroundColor: tPrimaryColor,
         actions: [
-          FutureBuilder<CustomerStaticData>(
-                future: loadCustomerStaticData(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return FutureBuilder(
-                      future: Future.delayed(const Duration(seconds: 3)), // Delay for 2 seconds
-        builder: (context, delaySnapshot) {
-
-                      return Expanded(
-                                      child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                          tGreetings,
-                          style: GoogleFonts.openSans(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
+          FutureBuilder(
+            future: Future.delayed(const Duration(seconds: 3)),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text(
+                        tGreetings,
+                        style: GoogleFonts.openSans(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                                      ),
-                                    );}
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text("Error: ${snapshot.error}");
-                  } else if (!snapshot.hasData) {
-                    return const Text("No data available");
-                  } 
-                  else {
-                    final customerStaticData =
-                        snapshot.data!; 
-                    
-                   
+                    ),
+                  ),
+                );
+              } else {
                 return Expanded(
                   child: Row(
                     children: [
@@ -97,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                                     const Text(
                                       tGreetings,
                                     ),
-                                    Text(customerStaticData.customerName,
+                                    Text("Mr. John Jimoh",
                                         style:
                                             GoogleFonts.openSans(fontSize: 18)),
                                   ],
@@ -119,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 );
-              } 
+              }
             },
           ),
         ],

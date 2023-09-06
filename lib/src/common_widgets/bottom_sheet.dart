@@ -32,7 +32,7 @@ void showTransactionBottomSheet(
               ),
             ),
             const SizedBox(
-              height: 40,
+              height: 10,
             ),
             const Text('Transaction Details'),
             const SizedBox(
