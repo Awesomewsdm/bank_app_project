@@ -1,7 +1,6 @@
 // ignore: depend_on_referenced_packages
 import 'package:bank_app/src/screens/auth_screens/login_screen.dart';
 import 'package:bank_app/src/screens/change_password_screen.dart';
-import 'package:bank_app/src/screens/data.dart';
 import 'package:bank_app/src/screens/home_screen.dart';
 import 'package:bank_app/src/screens/profile_screen.dart';
 import 'package:bank_app/src/screens/splash_screen.dart';
@@ -17,11 +16,11 @@ const String pProfileScreen = "/profile";
 const String pChangePasswordScreen = "/change-password";
 
 final router = GoRouter(
-  initialLocation: pHome, // Set the initial route
+  initialLocation: pLogin, // Set the initial route
   routes: [
     GoRoute(
       path: pHome,
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) =>  HomeScreen(),
     ),
     GoRoute(
       path: pLogin,
@@ -35,10 +34,7 @@ final router = GoRouter(
       path: pPasswordReset,
       builder: (context, state) => PasswordResetScreen(),
     ),
-    GoRoute(
-      path: pHome2,
-      builder: (context, state) => Home(),
-    ),
+   
     GoRoute(
       path: pProfileScreen,
       builder: (context, state) => const ProfileScreen(),

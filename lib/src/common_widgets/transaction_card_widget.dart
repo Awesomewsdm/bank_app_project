@@ -37,7 +37,7 @@ class TransactionCard extends StatelessWidget {
           border: Border.all(width: 0, color: tTransactionCardBorderColor),
         ),
         width: double.infinity,
-        height: 87.0,
+        height: 90.0,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -136,17 +136,7 @@ final items = [
   ),
 ];
 
-// buildScreen(int selectedIndex) {
-//   switch (selectedIndex) {
-//     case 0:
-//       return const HomePage();
 
-//     case 1:
-//       return const TransactionPage();
-//     default:
-//       return Container();
-//   }
-// }
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -165,20 +155,21 @@ class HomePage extends StatelessWidget {
 class BottomNavShape extends StatelessWidget {
   const BottomNavShape({
     super.key,
-    required this.backgroundColor1,
+    required this.navBgColor1,
+    required this.navBgColor2,
     required this.iconColor,
-    required this.backgroundColor2,
     required this.buttonIcon,
     required this.onTap,
-    required this.label,
+    required this.label, required this.textColor,
   });
 
-  final Color backgroundColor1;
-  final Color backgroundColor2;
+  final Color navBgColor1;
+  final Color navBgColor2;
   final String buttonIcon;
   final Color iconColor;
   final void Function() onTap;
   final String label;
+  final Color textColor;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -189,7 +180,7 @@ class BottomNavShape extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              color: backgroundColor1,
+              color: navBgColor1,
               width: 100,
               height: 100,
             ),
@@ -197,7 +188,7 @@ class BottomNavShape extends StatelessWidget {
               transform: Matrix4.skewX(-0.2), // Adjust the skew value as needed
               alignment: Alignment.topLeft,
               child: Container(
-                color: backgroundColor2,
+                color: navBgColor2,
               ),
             ),
             Center(
@@ -210,11 +201,11 @@ class BottomNavShape extends StatelessWidget {
                     color: iconColor,
                   ),
                   Text(label,
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.roboto(color: textColor,
                           fontSize: 15, fontWeight: FontWeight.bold))
                 ],
               ),
-            )),
+            ),),
           ],
         ),
       ),

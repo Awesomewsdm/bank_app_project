@@ -7,9 +7,12 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   NavigationBloc()
       : super(
           const NavigationState(
+            backgroundColor: tPrimaryColor,
               selectedIndex: 0,
-              backgroundColor: tPrimaryColor,
-              textColor: tWhiteColor),
+              navBgColor1: tPrimaryColor,
+              navBgColor2: tWhiteColor,
+              textColor: tOrangeColor,
+              iconColor: tOrangeColor),
         ) {
     on<NavigationTabSelected>(_onNavigationTabSelected);
   }
@@ -19,25 +22,29 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
     emit(
       NavigationState(
           selectedIndex: event.selectedTab,
-          backgroundColor: tPrimaryColor,
-          textColor: tWhiteColor),
+          backgroundColor: 
+          event.selectedTab == 0
+          ? tPrimaryColor
+          : tWhiteColor,
+          navBgColor1: 
+          event.selectedTab == 0
+          ? tPrimaryColor
+          : tWhiteColor,
+navBgColor2:  
+event.selectedTab == 0
+          ? tPrimaryColor
+          : tWhiteColor
+ ,
+          textColor: event.selectedTab == 0 ?
+          tOrangeColor:
+       tWhiteColor,  
+           iconColor:
+           event.selectedTab == 0 
+      ? tOrangeColor:
+       tWhiteColor, 
+           ),
     );
   }
 
-  @override
-  Stream<NavigationState> mapEventToState(NavigationEvent event) async* {
-    if (event is NavigationTabSelected) {
-      final textColor = event.selectedTab == 0
-          ? tSecondaryColor
-          : tWhiteColor; // Customize text color
-      final backgroundColor = event.selectedTab == 0
-          ? tPrimaryColor
-          : tWhiteColor; // Customize background color
-      yield NavigationState(
-        selectedIndex: event.selectedTab,
-        textColor: textColor,
-        backgroundColor: backgroundColor,
-      );
-    }
-  }
+ 
 }

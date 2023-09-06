@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void startTimer() {
     Timer(const Duration(seconds: 2), () {
-      router.go(pHome2);
+      router.go(pHome);
     });
   }
 

@@ -74,12 +74,12 @@ Widget buildAccountBalancePage() {
               ),
             ),
             const Spacer(),
-            const Text("See all ")
+            const Text("See all")
           ],
         ),
       ),
       FutureBuilder(
-        future: Future.delayed(const Duration(seconds: 3)),
+        future: Future.delayed(const Duration(seconds: 6)),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Expanded(

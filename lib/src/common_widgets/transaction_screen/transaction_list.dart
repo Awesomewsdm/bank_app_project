@@ -30,19 +30,22 @@ Widget buildTransactionList(String filter) {
         } else if (snapshot.hasData) {
           final transactionDataList = snapshot.data!;
 
-          return AnimatedList(
+          return 
+          ListView.builder(
             key: listKey,
-            initialItemCount: transactionDataList.length,
-            itemBuilder: (context, index, animation) {
+            itemCount: transactionDataList.length,
+            itemBuilder: (context, index) {
               final transactionData = transactionDataList[index];
               final String transactionAmount =
                   decimalFormatter.format(transactionData.transactionAmount);
-              return SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(1.0, 0.0),
-                  end: const Offset(0.0, 0.0),
-                ).animate(animation),
-                child: TransactionCard(
+              return 
+              // SlideTransition(
+              //   position: Tween<Offset>(
+              //     begin: const Offset(1.0, 0.0),
+              //     end: const Offset(1.0, 0.0),
+              //   ).animate(animation),
+              //   child: 
+                TransactionCard(
                   onTap: () {
                     showTransactionBottomSheet(
                       context,
@@ -71,8 +74,8 @@ Widget buildTransactionList(String filter) {
                       transactionData.transactionDirection == tCredit
                           ? tGradientColor1
                           : tGradientColor2,
-                ),
-              );
+                );
+              
             },
           );
         } else {
@@ -86,7 +89,7 @@ Widget buildTransactionList(String filter) {
 Widget buildBottomNavigationBar(
     pageController, BuildContext context, NavigationState state) {
   return Container(
-    color: state.backgroundColor,
+    color: tWhiteColor,
     height: bottomNavigatorHeight,
     child: Row(
       children: [
@@ -100,9 +103,10 @@ Widget buildBottomNavigationBar(
               pageController.jumpToPage(0);
             },
             buttonIcon: tHomeIcon,
-            backgroundColor2: state.backgroundColor,
-            backgroundColor1: state.backgroundColor,
-            iconColor: state.textColor,
+            navBgColor1: state.backgroundColor,
+            navBgColor2: state.backgroundColor,
+            
+            iconColor: state.iconColor, textColor: state.textColor,
           ),
         ),
         Expanded(
@@ -115,9 +119,9 @@ Widget buildBottomNavigationBar(
               pageController.jumpToPage(1);
             },
             buttonIcon: tTransactionIcon,
-            backgroundColor2: state.backgroundColor,
-            backgroundColor1: state.backgroundColor,
-            iconColor: state.textColor,
+            navBgColor1: state.backgroundColor,
+            navBgColor2: state.backgroundColor,
+            iconColor: state.iconColor, textColor: state.textColor,
           ),
         )
       ],

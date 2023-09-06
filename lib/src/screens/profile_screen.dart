@@ -18,8 +18,8 @@ class ProfileScreen extends StatelessWidget {
         children: [
           Container(
             color: tPrimaryColor,
-            padding: const EdgeInsets.symmetric(
-                vertical: 10, horizontal: tFormHeight - 10),
+            padding: const EdgeInsets.only(
+                top: 30,left: 10, right: 10 ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -69,62 +69,74 @@ class ProfileScreen extends StatelessWidget {
                     return const Text("No data available");
                   } else {
                     final customerStaticData =
-                        snapshot.data!.first; // Assuming you have one customer
+                        snapshot.data!.first; 
+                    
+                     final customerNameParts = customerStaticData.customerName.split(' ');
+            final firstName = customerNameParts[0];
+            final otherName = customerNameParts.length > 1 ? customerNameParts[1] : '';
+
+                    
                     return Row(
                       children: [
                         Image.asset(
                           tProfilePic,
                         ),
                         const SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            UserInfo(
-                              title: "FIRST NAME",
-                              label: customerStaticData.customerName,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            UserInfo(
-                              title: "GENDER",
-                              label: customerStaticData.gender,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            UserInfo(
-                              title: "ID",
-                              label: customerStaticData.customerID,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        Column(
+                        Padding(
+                          padding: const EdgeInsets.only(top:8.0),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const UserInfo(
-                                title: "OTHER NAME",
-                                label: "",
+                              UserInfo(
+                                title: "FIRST NAME",
+                                label: firstName,
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
                               UserInfo(
-                                title: "TITLE",
-                                label: customerStaticData.title,
+                                title: "GENDER",
+                                label: customerStaticData.gender,
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
-                            ],),
+                              UserInfo(
+                                title: "ID",
+                                label: customerStaticData.customerID,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top:8.0),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                 UserInfo(
+                                  title: "OTHER NAME",
+                                  label: otherName,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                UserInfo(
+                                  title: "TITLE",
+                                  label: customerStaticData.title,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              ],),
+                        ),
                       ],
                     );
                   }
@@ -134,12 +146,16 @@ class ProfileScreen extends StatelessWidget {
             width: double.infinity,
             color: tTranscationHeaderColor,
             padding: const EdgeInsets.all(10.0),
-            child: Text(
-              tAccountSettings,
-              style: GoogleFonts.openSans(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-                color: Colors.black,
+            child: Padding(
+                               padding: const EdgeInsets.only(left:8.0),
+
+              child: Text(
+                tAccountSettings,
+                style: GoogleFonts.openSans(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
@@ -160,13 +176,18 @@ class ProfileScreen extends StatelessWidget {
           Container(
             width: double.infinity,
             color: tTranscationHeaderColor,
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              tAboutTitle,
-              style: GoogleFonts.openSans(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-                color: Colors.black,
+                              padding: const EdgeInsets.only(left:8.0),
+
+            child: Padding(
+                               padding: const EdgeInsets.only(left:8.0),
+
+              child: Text(
+                tAboutTitle,
+                style: GoogleFonts.openSans(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
@@ -178,10 +199,14 @@ class ProfileScreen extends StatelessWidget {
                     Border.all(width: 0, color: tTransactionCardBorderColor)),
             child: const Row(
               children: [
-                SizedBox(width: 20),
-                Text(
-                  tTermsAndConditions,
-                  style: TextStyle(color: tPrimaryColor),
+                
+                Padding(
+                                    padding: EdgeInsets.only(left:8.0),
+
+                  child: Text(
+                    tTermsAndConditions,
+                    style: TextStyle(color: tPrimaryColor),
+                  ),
                 ),
               ],
             ),
@@ -194,10 +219,13 @@ class ProfileScreen extends StatelessWidget {
                     Border.all(width: 0, color: tTransactionCardBorderColor)),
             child: const Row(
               children: [
-                SizedBox(width: 20),
-                Text(
-                  tPrivacyPolicy,
-                  style: TextStyle(color: tPrimaryColor),
+               
+                Padding(
+                  padding: EdgeInsets.only(left:8.0),
+                  child: Text(
+                    tPrivacyPolicy,
+                    style: TextStyle(color: tPrimaryColor),
+                  ),
                 ),
               ],
             ),
@@ -237,8 +265,8 @@ class UserInfo extends StatelessWidget {
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title),
-        Text(label),
+        Text(title, style: GoogleFonts.openSans(fontSize: 10),),
+        Text(label, style: GoogleFonts.openSans(fontSize: 15),),
       ],
     ));
   }
@@ -258,20 +286,24 @@ class ProfileInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            border: Border.all(width: 0, color: tTransactionCardBorderColor)),
-        child: Row(
-          children: [
-            SvgPicture.asset(iconString),
-            const SizedBox(width: 20),
-            Text(
-              label,
-              style: const TextStyle(color: tPrimaryColor),
-            ),
-          ],
+      child: Padding(
+                          padding: const EdgeInsets.only(left:8.0),
+
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              border: Border.all(width: 0, color: tTransactionCardBorderColor)),
+          child: Row(
+            children: [
+              SvgPicture.asset(iconString),
+              const SizedBox(width: 20),
+              Text(
+                label,
+                style: const TextStyle(color: tPrimaryColor),
+              ),
+            ],
+          ),
         ),
       ),
     );
