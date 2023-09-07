@@ -15,7 +15,9 @@ import 'package:intl/intl.dart';
 
 final decimalFormatter = NumberFormat('#,##0.00');
 
-// final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
+final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
+
+
 
 Widget buildTransactionList(String filter) {
   return SizedBox(
@@ -31,43 +33,45 @@ Widget buildTransactionList(String filter) {
           final transactionDataList = snapshot.data!;
 
           return 
-          ListView.builder(
-            itemCount: transactionDataList.length,
-            itemBuilder: (context, index) {
+          AnimatedList(
+            initialItemCount: transactionDataList.length,
+            itemBuilder: (context, index, animation) {
               final transactionData = transactionDataList[index];
               final String transactionAmount =
                   decimalFormatter.format(transactionData.transactionAmount);
-              return 
-            
-                TransactionCard(
-                  onTap: () {
-                    showTransactionBottomSheet(
-                      context,
-                      transactionData.transactionDate,
-                      transactionData.transactionNarration,
-                      transactionData.transactionDirection,
-                      "GHC 0.00",
-                      transactionAmount,
-                    );
-                  },
-                  icon: transactionData.transactionDirection == tCredit
-                      ? tMoneySendIcon
-                      : tMoneyReceiveIcon,
-                  transactionAmount: transactionAmount,
-                  transactionNarration: transactionData.transactionNarration,
-                  transactionDate: transactionData.transactionDate,
-                  transactionDirection: transactionData.transactionDirection,
-                  iconBgColor: transactionData.transactionDirection == tCredit
-                      ? backgroundColor2
-                      : backgroundColor1,
-                  majorGradientColor:
-                      transactionData.transactionDirection == tCredit
-                          ? tPrimaryColor
-                          : tSecondaryColor,
-                  minorGradientColor:
-                      transactionData.transactionDirection == tCredit
-                          ? tGradientColor1
-                          : tGradientColor2,
+              return  SizeTransition(
+                  key: listKey,
+                   sizeFactor: animation,
+                  child: TransactionCard(
+                    onTap: () {
+                      showTransactionBottomSheet(
+                        context,
+                        transactionData.transactionDate,
+                        transactionData.transactionNarration,
+                        transactionData.transactionDirection,
+                        "GHC 0.00",
+                        transactionAmount,
+                      );
+                    },
+                    icon: transactionData.transactionDirection == tCredit
+                        ? tMoneySendIcon
+                        : tMoneyReceiveIcon,
+                    transactionAmount: transactionAmount,
+                    transactionNarration: transactionData.transactionNarration,
+                    transactionDate: transactionData.transactionDate,
+                    transactionDirection: transactionData.transactionDirection,
+                    iconBgColor: transactionData.transactionDirection == tCredit
+                        ? backgroundColor2
+                        : backgroundColor1,
+                    majorGradientColor:
+                        transactionData.transactionDirection == tCredit
+                            ? tPrimaryColor
+                            : tSecondaryColor,
+                    minorGradientColor:
+                        transactionData.transactionDirection == tCredit
+                            ? tGradientColor1
+                            : tGradientColor2,
+                  ),
                 );
               
             },
