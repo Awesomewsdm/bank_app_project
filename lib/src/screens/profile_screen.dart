@@ -4,7 +4,6 @@ import 'package:bank_app/src/service/customer_static_data.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_app/src/constants/colors.dart';
 import 'package:bank_app/src/constants/image_strings.dart';
-import 'package:bank_app/src/constants/sizes.dart';
 import 'package:bank_app/src/constants/app_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
