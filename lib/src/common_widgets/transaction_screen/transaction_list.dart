@@ -15,9 +15,6 @@ import 'package:intl/intl.dart';
 
 final decimalFormatter = NumberFormat('#,##0.00');
 
-final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
-
-
 
 Widget buildTransactionList(String filter) {
   return SizedBox(
@@ -38,10 +35,14 @@ Widget buildTransactionList(String filter) {
             itemBuilder: (context, index, animation) {
               final transactionData = transactionDataList[index];
               final String transactionAmount =
-                  decimalFormatter.format(transactionData.transactionAmount);
-              return  SizeTransition(
-                  key: listKey,
-                   sizeFactor: animation,
+                  decimalFormatter.format(transactionData.transactionAmount); final slideTween = Tween<Offset>(
+      begin: Offset(0, -1 ), 
+      end: Offset.zero,
+    );
+    final slideAnimation = animation.drive(slideTween);
+              return   SlideTransition(
+                
+                   position: slideAnimation,
                   child: TransactionCard(
                     onTap: () {
                       showTransactionBottomSheet(
