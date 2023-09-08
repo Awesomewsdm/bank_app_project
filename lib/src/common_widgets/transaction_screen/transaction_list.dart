@@ -36,7 +36,7 @@ Widget buildTransactionList(String filter) {
               final transactionData = transactionDataList[index];
               final String transactionAmount =
                   decimalFormatter.format(transactionData.transactionAmount); final slideTween = Tween<Offset>(
-      begin: Offset(0, -1 ), 
+      begin: const Offset(0, -1 ), 
       end: Offset.zero,
     );
     final slideAnimation = animation.drive(slideTween);
